@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config(); // ✅ Load environment variables from Render or .env
 import app from "./app.js";
 import cloudinary from "cloudinary";
 
