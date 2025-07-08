@@ -22,7 +22,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/user/register",
+        `${import.meta.env.VITE_API_URL}/api/v1/user/register`,
         { name, phone, email, role, password },
         {
           headers: {
@@ -31,6 +31,7 @@ const Register = () => {
           withCredentials: true,
         }
       );
+
       toast.success(data.message);
       setName("");
       setEmail("");
@@ -38,15 +39,15 @@ const Register = () => {
       setPhone("");
       setRole("");
       setIsAuthorized(true);
+      setUser(data.user);
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message || "Registration failed");
     }
   };
 
-  if(isAuthorized){
-    return <Navigate to={'/'}/>
+  if (isAuthorized) {
+    return <Navigate to={"/"} />;
   }
-
 
   return (
     <>
@@ -123,7 +124,7 @@ const Register = () => {
           </form>
         </div>
         <div className="banner">
-          <img src="/register.png" alt="login" />
+          <img src="/register.png" alt="register" />
         </div>
       </section>
     </>
