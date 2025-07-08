@@ -2,6 +2,16 @@ import dotenv from "dotenv";
 dotenv.config(); // Load env variables from Render or .env
 
 import app from "./app.js";
+import cors from "cors";
+
+// Enable CORS for your frontend
+app.use(
+  cors({
+    origin: "https://job-portal-app-kohl.vercel.app", // ✅ Your Vercel frontend
+    credentials: true,
+  })
+);
+
 import cloudinary from "cloudinary";
 import dbConnection from "./database/dbConnection.js"; // ✅ Don't forget this!
 
