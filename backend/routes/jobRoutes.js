@@ -11,11 +11,14 @@ import { isAuthenticated } from "../middlewares/auth.js";
 
 const router = express.Router();
 
-router.get("/getall", getAllJobs);
-router.post("/post", isAuthenticated, postJob);
-router.get("/getmyjobs", isAuthenticated, getMyJobs);
-router.put("/update/:id", isAuthenticated, updateJob);
-router.delete("/delete/:id", isAuthenticated, deleteJob);
-router.get("/:id", isAuthenticated, getSingleJob);
+// Public Routes
+router.get("/jobs", getAllJobs); // ✅ GET all jobs
+router.get("/jobs/:id", isAuthenticated, getSingleJob); // ✅ GET job by ID
+
+// Protected Routes
+router.post("/jobs", isAuthenticated, postJob); // ✅ POST a job
+router.get("/jobs/my", isAuthenticated, getMyJobs); // ✅ GET my jobs
+router.put("/jobs/:id", isAuthenticated, updateJob); // ✅ UPDATE job
+router.delete("/jobs/:id", isAuthenticated, deleteJob); // ✅ DELETE job
 
 export default router;
