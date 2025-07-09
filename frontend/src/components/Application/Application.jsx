@@ -86,8 +86,7 @@ const Application = () => {
       toast.success(data.message);
       navigateTo("/job/getall");
     } catch (error) {
-      const errorMessage = error.response?.data?.message ||
-        "Something went wrong. Please try again later.";
+      const errorMessage = error.response?.data?.message || "Something went wrong. Please try again later.";
       toast.error(errorMessage);
 
       if (errorMessage.includes("Cloudinary") || errorMessage.includes("api_key")) {
@@ -100,6 +99,7 @@ const Application = () => {
 
   if (!isAuthorized || (user && user.role === "Employer")) {
     navigateTo("/");
+    return null; // 🧠 Important to stop rendering here!
   }
 
   return (
@@ -142,9 +142,7 @@ const Application = () => {
             required
           />
           <div>
-            <label
-              style={{ textAlign: "start", display: "block", fontSize: "20px" }}
-            >
+            <label style={{ textAlign: "start", display: "block", fontSize: "20px" }}>
               Upload Resume
               <p style={{ color: "red", fontSize: "12px", margin: "5px 0 0 0" }}>
                 (Supported formats: PNG, JPEG, WEBP. Max size: 2MB)
@@ -179,12 +177,3 @@ const Application = () => {
 };
 
 export default Application;
-
-  
-   
-   
-      
-   
-        
-           
-         
