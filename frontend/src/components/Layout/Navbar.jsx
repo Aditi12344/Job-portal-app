@@ -25,16 +25,39 @@ const Navbar = () => {
     }
   };
 
-  if (!isAuthorized) return null;
-
   return (
     <nav className="navbarShow">
-      {/* ... rest unchanged */}
+      <div className="left">
+        <h2>
+          <Link to="/">JobZee</Link>
+        </h2>
+      </div>
+
+      <div className={`right ${show ? "show" : ""}`}>
+        {isAuthorized ? (
+          <>
+            <Link to="/job/getall">All Jobs</Link>
+            <Link to="/job/post">Post Job</Link>
+            <Link to="/job/me">My Jobs</Link>
+            <Link to="/applications/me">My Applications</Link>
+            <span>Welcome, {user?.name || "User"}</span>
+            <button onClick={handleLogout}>Logout</button>
+          </>
+        ) : (
+          <>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
+          </>
+        )}
+      </div>
+
+      <div className="hamburger" onClick={() => setShow(!show)}>
+        {show ? <AiOutlineClose size={20} /> : <GiHamburgerMenu size={20} />}
+      </div>
     </nav>
   );
 };
 
 export default Navbar;
 
-     
-   
+      
