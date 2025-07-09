@@ -99,11 +99,7 @@ const MyJobs = () => {
                         disabled={editingMode !== element._id}
                         value={element.country}
                         onChange={(e) =>
-                          handleInputChange(
-                            element._id,
-                            "country",
-                            e.target.value
-                          )
+                          handleInputChange(element._id, "country", e.target.value)
                         }
                       />
                     </div>
@@ -123,11 +119,7 @@ const MyJobs = () => {
                       <select
                         value={element.category}
                         onChange={(e) =>
-                          handleInputChange(
-                            element._id,
-                            "category",
-                            e.target.value
-                          )
+                          handleInputChange(element._id, "category", e.target.value)
                         }
                         disabled={editingMode !== element._id}
                       >
@@ -151,11 +143,7 @@ const MyJobs = () => {
                           disabled={editingMode !== element._id}
                           value={element.fixedSalary}
                           onChange={(e) =>
-                            handleInputChange(
-                              element._id,
-                              "fixedSalary",
-                              e.target.value
-                            )
+                            handleInputChange(element._id, "fixedSalary", e.target.value)
                           }
                         />
                       ) : (
@@ -165,11 +153,7 @@ const MyJobs = () => {
                             disabled={editingMode !== element._id}
                             value={element.salaryFrom}
                             onChange={(e) =>
-                              handleInputChange(
-                                element._id,
-                                "salaryFrom",
-                                e.target.value
-                              )
+                              handleInputChange(element._id, "salaryFrom", e.target.value)
                             }
                           />
                           <input
@@ -177,11 +161,7 @@ const MyJobs = () => {
                             disabled={editingMode !== element._id}
                             value={element.salaryTo}
                             onChange={(e) =>
-                              handleInputChange(
-                                element._id,
-                                "salaryTo",
-                                e.target.value
-                              )
+                              handleInputChange(element._id, "salaryTo", e.target.value)
                             }
                           />
                         </div>
@@ -192,11 +172,7 @@ const MyJobs = () => {
                       <select
                         value={element.expired}
                         onChange={(e) =>
-                          handleInputChange(
-                            element._id,
-                            "expired",
-                            e.target.value
-                          )
+                          handleInputChange(element._id, "expired", e.target.value)
                         }
                         disabled={editingMode !== element._id}
                       >
@@ -211,4 +187,42 @@ const MyJobs = () => {
                       <span>Description:</span>
                       <textarea
                         rows={5}
+                        disabled={editingMode !== element._id}
                         value={element.description}
+                        onChange={(e) =>
+                          handleInputChange(element._id, "description", e.target.value)
+                        }
+                      />
+                    </div>
+                  </div>
+
+                  <div className="actions">
+                    {editingMode === element._id ? (
+                      <div className="edit_mode">
+                        <button onClick={() => handleUpdateJob(element._id)}>
+                          <FaCheck />
+                        </button>
+                        <button onClick={handleDisableEdit}>
+                          <RxCross2 />
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="default_mode">
+                        <button onClick={() => handleEnableEdit(element._id)}>Edit</button>
+                        <button onClick={() => handleDeleteJob(element._id)}>Delete</button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>You haven’t posted any jobs yet.</p>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default MyJobs;
