@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../../main";
@@ -17,6 +17,16 @@ const Application = () => {
   const { isAuthorized, user } = useContext(Context);
   const navigateTo = useNavigate();
   const { id } = useParams();
+
+  useEffect(() => {
+    if (!isAuthorized || (user && user.role === "Employer")) {
+      navigateTo("/");
+    }
+  }, [isAuthorized, user, navigateTo]);
+
+  if (!isAuthorized || (user && user.role === "Employer")) {
+    return null; // ✅ Prevent rendering while redirecting
+  }
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -96,11 +106,6 @@ const Application = () => {
       setLoading(false);
     }
   };
-
-  if (!isAuthorized || (user && user.role === "Employer")) {
-    navigateTo("/");
-    return null; // 🧠 Important to stop rendering here!
-  }
 
   return (
     <section className="application">
